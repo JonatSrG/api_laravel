@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class PostControllerTest extends TestCase
 {
+    use RefreshDatabase;
+    
     public function test_store()
     {
         $response = $this->json('POST', '/api/posts', [

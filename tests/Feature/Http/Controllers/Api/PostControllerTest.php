@@ -12,17 +12,6 @@ class PostTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function unauthenticated_users_cannot_access_the_post_api()
-    {
-        //$this->withoutExceptionHandling();
-
-        $this->json('GET',     '/api/posts')->assertStatus(401);
-        $this->json('POST',    '/api/posts')->assertStatus(401);
-        $this->json('GET',     '/api/posts/1000')->assertStatus(401);
-        $this->json('PUT',     '/api/posts/1000')->assertStatus(401);
-        $this->json('DELETE',  '/api/posts/1000')->assertStatus(401);
-    }
-
     public function test_store()
     {
         //$this->withoutExceptionHandling();
@@ -105,6 +94,17 @@ class PostTest extends TestCase
                 '*' => ['id', 'title', 'created_at', 'update_at']
             ]
         ])->assertStatus(200);//estatus de ok
+    }
+
+    public function test_guest()
+    {
+        //$this->withoutExceptionHandling();
+
+        $this->json('GET',     '/api/posts')->assertStatus(401);
+        $this->json('POST',    '/api/posts')->assertStatus(401);
+        $this->json('GET',     '/api/posts/1000')->assertStatus(401);
+        $this->json('PUT',     '/api/posts/1000')->assertStatus(401);
+        $this->json('DELETE',  '/api/posts/1000')->assertStatus(401);
     }
 
 }

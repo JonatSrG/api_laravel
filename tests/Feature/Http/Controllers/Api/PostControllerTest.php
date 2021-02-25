@@ -9,9 +9,10 @@ use Tests\TestCase;
 class PostControllerTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     public function test_store()
     {
+        //$this->withExceptionHandling();
         $response = $this->json('POST', '/api/posts', [
             'title' => 'El post de prueba'
         ]);

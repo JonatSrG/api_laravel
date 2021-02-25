@@ -13,9 +13,9 @@ class PageTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function test_about()
     {
-        $response = $this->get('/');
+        $response = $this->get('/about');
 
         $response->assertStatus(200);
     }

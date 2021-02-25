@@ -11,7 +11,6 @@
 |
 */
 
-Route::apiResource('posts', 'Api\PostController');
 
 
 

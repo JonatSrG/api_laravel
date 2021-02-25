@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 
 use App\Post;
 use App\Http\Requests\Post as PostRequests;
-use App\Http\Resources\Post as PostResource;
-use App\Http\Resources\PostCollection;
 
 
 class PostController extends Controller
@@ -25,7 +23,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return new PostCollection($this->post->paginate());
+        return response()->json($this->post->paginate());
     }
 
     /**
@@ -38,7 +36,7 @@ class PostController extends Controller
     {
         $post = $this->post->create($request->all());
 
-        return response()->json(new PostResource($post), 201);
+        return response()->json($post, 201);
     }
 
     /**
@@ -49,7 +47,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return response()->json(new PostResource($post));
+        return response()->json($post);
     }
 
     /**
@@ -63,7 +61,7 @@ class PostController extends Controller
     {
         $post->update($request->all());
 
-        return response()->json(new PostResource($post));
+        return response()->json($post);
     }
 
     /**

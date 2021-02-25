@@ -8,15 +8,16 @@ use Tests\TestCase;
 
 class PostControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    public function test_store()
     {
-        $response = $this->get('/');
+        $response = $this->json('POST', '/api/posts', [
+            'title' => 'El post de prueba'
+        ]);
 
-        $response->assertStatus(200);
+        $response->assertJsonStructure(['id', 'title', 'created_at', 'updated_at'])
+        ->assertJson(['title' => 'El post de prueba'])
+        ->assertStatus(201);//peticion en forma ok y genara un recurso
+
+        $this->assertDatabaseHas('posts', ['title' => 'El post de prueba']);
     }
 }
